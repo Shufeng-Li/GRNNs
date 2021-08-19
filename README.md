@@ -1,5 +1,25 @@
+
 # GRNNs
 
-General Regression Neural Networks (GRNNs) package.
+<!-- badges: start -->
+<!-- badges: end -->
 
-This GRNNs package uses various distance functions inluding: "euclidean", "minkowski", "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming", "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao","mahalanobis".
+The goal of GRNNs is to build a GRNN model using different functions.
+
+## Installation
+
+You can install the released version of GRNNs from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("GRNNs")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(GRNNs)
+## basic example code
+```
+
