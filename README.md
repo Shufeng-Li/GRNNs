@@ -9,13 +9,8 @@ This GRNNs package uses various distance functions inluding: "euclidean", "minko
 
 ## Installation
 
-You can install the released version of GRNNs from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("GRNNs")
-```
-or install from 
-[github](https://github.com/Shufeng-Li/GRNNs/) with:)
+You can install the released version of GRNNs from 
+[github](https://github.com/Shufeng-Li/GRNNs/) with:
 
 ``` r
 library(devtools)
