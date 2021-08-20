@@ -20,7 +20,8 @@ The matrix of distance between a and b
 grnn distance
 }
 \examples{
-data("met")
 data("physg")
-distance<-grnn.distance(physg[1:30,],physg[40:60,],"bray")
+physg.train<-physg[1:10,]
+physg.test<-physg[11:30,]
+distance<-grnn.distance(physg.test,physg.train,"bray")
 }

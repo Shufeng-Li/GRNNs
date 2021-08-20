@@ -1,0 +1,88 @@
+---
+title: "General Regression Neural Networks (GRNNs) package"
+author: "Shufeng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{GRNNs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The goal of GRNNs is to build a GRNN model using different functions. This GRNNs package uses various distance functions inluding: "euclidean", "minkowski", "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming", "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao","mahalanobis".
+
+To load the package:
+```{r setup}
+library(GRNNs)
+```
+
+## dataset
+
+The CLAMP global data set (Li et al., 2016; the CLAMP website: http://clamp.ibcas.ac.cn) includes: a physiognomic data set describing leaf characteristics for each site, and a meteorological data set for the same sites. The CLAMP global data set including 378 sites worldwide. The meteorological data consists of 11 parameters derived from a gridded data set (New et al., 2002; Spicer et al., 2009). The physiognomic data consist of 31 variables of leaf physiognomy collected from at least 20 taxa for each site.
+
+To load data:
+```{r}
+data("met")
+data("physg")
+```
+
+## The performance of GRNNs model
+
+The k-fold cross-validation is used to evaluate the performance of GRNNs. The root mean square error (RMSE), standard deviation of absolute error (SDAE) were used to evaluate the accuracy and precision of different models respectively. The mean absolute error (MAE), standard deviation (STDEV) , coefficient of correlation (R), and P-value also provide.
+An example is illustrated below:
+
+```{r}
+data("met")
+data("physg")
+results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
+```
+
+## Find best spreads
+
+The best spreads have to be tuned which can be calculated from the function findSpread. An example is illustrated below:
+
+```{r}
+data("met")
+data("physg")
+best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)
+```
+
+## grnn
+
+The grnn function can predict single or multiple data using various functions. The best spreads should be calculated from the above example. An example is illustrated below:
+
+```{r}
+data("met")
+data("physg")
+best.spread<-c(0.33,0.33,0.31,0.34,0.35,0.35,0.32,0.31,0.29,0.35,0.35)
+predict<-physg[1,]
+physg.train<-physg[-1,]
+met.train<-met[-1,]
+prediction<-grnn(predict,physg.train,met.train,fun="euclidean",best.spread,scale=TRUE)
+```
+
+## grnn distance
+
+The grnn distance function is used to calculate the distance (or dissimilarity coefficients) between two data sets. An example is illustrated below:
+
+```{r}
+data("physg")
+physg.train<-physg[1:10,]
+physg.test<-physg[11:30,]
+distance<-grnn.distance(physg.test,physg.train,"bray")
+```
+
+## references
+
+Li, S.-F., Jacques, F.M., Spicer, R.A., Su, T., Spicer, T.E., Yang, J., Zhou, Z.-K., 2016. Artificial neural networks reveal a high-resolution climatic signal in leaf physiognomy. Palaeogeogr. Palaeoclimatol. Palaeoecol. 442, 1-11.
+
+New, M., Lister, D., Hulme, M.,Makin, I., 2002. A high-resolution data set of surface climate over global land areas. Clim. Res. 21, 1–25.
+
+Spicer, R.A., Valdes, P.J., Spicer, T.E.V., Craggs, H.J., Srivastava, G., Mehrotra, R.C., Yang, J., 2009. New developments in CLAMP: calibration using global gridded meteorological data. Palaeogeogr. Palaeoclimatol. Palaeoecol. 283, 91–98.

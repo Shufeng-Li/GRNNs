@@ -21,5 +21,7 @@ distance using vegdist
 }
 \examples{
 data("physg")
-distance<-veg.distance(physg[1:10,],physg[20:40,],"bray")
+physg.train<-physg[1:10,]
+physg.test<-physg[11:30,]
+distance<-veg.distance(physg.test,physg.train,"bray")
 }
