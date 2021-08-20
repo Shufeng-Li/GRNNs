@@ -15,7 +15,10 @@
 #' data("met")
 #' data("physg")
 #' best.spread<-c(0.33,0.33,0.31,0.34,0.35,0.35,0.32,0.31,0.29,0.35,0.35)
-#' prediction<-grnn(physg[1,],physg[-1,],met[-1,],fun="euclidean",best.spread,scale=TRUE)
+#' predict<-physg[1,]
+#' physg.train<-physg[-1,]
+#' met.train<-met[-1,]
+#' prediction<-grnn(predict,physg.train,met.train,fun="euclidean",best.spread,scale=TRUE)
 grnn<- function(p_input,p_train,v_train,fun="euclidean",best.spread,scale=TRUE){
   n_col<-ncol(v_train)
   n_row<-nrow(p_input)

@@ -10,7 +10,9 @@
 #'
 #' @examples
 #' data("physg")
-#' distance<-veg.distance(physg[1:10,],physg[20:40,],"bray")
+#' physg.train<-physg[1:10,]
+#' physg.test<-physg[11:30,]
+#' distance<-veg.distance(physg.test,physg.train,"bray")
 veg.distance <- function(a,b,fun="bray"){
   m <- rbind(a,b)+1
   v <- as.matrix(vegan::vegdist(m, method = fun))

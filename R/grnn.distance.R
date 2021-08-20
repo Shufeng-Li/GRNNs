@@ -9,9 +9,10 @@
 #' @export
 #'
 #' @examples
-#' data("met")
 #' data("physg")
-#' distance<-grnn.distance(physg[1:30,],physg[40:60,],"bray")
+#' physg.train<-physg[1:10,]
+#' physg.test<-physg[11:30,]
+#' distance<-grnn.distance(physg.test,physg.train,"bray")
 grnn.distance<-function(x,y,fun){
   if ( fun== "euclidean"|fun== "minkowski"|fun== "manhattan"|
        fun== "maximum"|fun== "canberra"|fun== "angular"|

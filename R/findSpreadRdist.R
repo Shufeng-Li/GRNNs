@@ -12,10 +12,10 @@
 #' @return The vector of best spreads
 #' @export
 #'
-findSpreadRdist <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data(taxa), y is the dependent data(met), k is the number of folds.
+findSpreadRdist <- function(x,y,k,fun,scale=TRUE) {
   spread_all<-NULL
   rmse_all<-NULL
-  cvr<-cvTools::cvFolds(nrow(x), K = k)  # Generate the index of random 10 folds for the data
+  cvr<-cvTools::cvFolds(nrow(x), K = k)  # Generate the index of random k folds for the data
   subcvr<-cvr$subsets   # Assign the index to subsvr
   for (spread in seq(0.01, 2, 0.01)) {
     predict<-NULL
@@ -29,7 +29,7 @@ findSpreadRdist <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data
         train.x<-scales::rescale(as.matrix(train.x), to=c(-1,1))
         validation.x<-scales::rescale(as.matrix(validation.x), to=c(-1,1))
       }
-      w.input<-rdist::cdist(train.x,validation.x,metric = fun) # Calculating the Euclidian distance between the trainning data and the validation data
+      w.input<-rdist::cdist(train.x,validation.x,metric = fun) # Calculating the distance between the trainning data and the validation data
       b.input<-w.input*sqrt(-log(.5))/spread
       a1<-exp(-b.input^2)                                      # Use Gaussian kernel function to transform the input data
       weight_all<-colSums(a1)
@@ -41,7 +41,6 @@ findSpreadRdist <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data
     predict1<-predict[order(rownames(predict)),]
     y1<-y[order(rownames(y)),]
     res<-predict1-y1          # Calculating the errors between the prediction values and the validation values
-    rsquare<-numeric(ncol(res)) # R-squared
     rmse<-sqrt(colSums(res^2)/nrow(res))  # root-mean-square error
     spread_all<-rbind(spread_all,spread)
     rmse_all<-rbind(rmse_all,rmse)
@@ -50,8 +49,7 @@ findSpreadRdist <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data
   test<-cbind(as.matrix(spread_all),rmse_all) # Combine the spread and rmse_all values together
   for (m in 1:ncol(y)) {
     best_num<-test[which(test[,m+1]==min(test[,m+1])),1]
-    best.spread[m]<-as.matrix(best_num[1])   # Find the optimal spread with maximal value of the R-squared
+    best.spread[m]<-as.matrix(best_num[1])   # Find the optimal spread with minimum value of rmse
   }
   best.spread
 }
-#end for find optimal spread

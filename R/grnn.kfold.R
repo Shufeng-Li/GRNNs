@@ -18,7 +18,7 @@
 #' data("met")
 #' data("physg")
 #' results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
-grnn.kfold <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data(taxa), y is the dependent data(y), k is the number of folds.
+grnn.kfold <- function(x,y,k,fun,scale=TRUE) {
   # the follow code are to find the optimal spread
   n_p<-ncol(y)
   n_s<-nrow(y)
@@ -36,7 +36,7 @@ grnn.kfold <- function(x,y,k,fun,scale=TRUE) {  # x is the independent data(taxa
     best.spread<-findSpread (tv.x,tv.y,k,fun)
     spread.end<-rbind(spread.end,best.spread)
     #end for find optimal spread
-    #begining to use the optimal spread to calculate the predict parameteres
+    #begining to use the optimal spread to calculate the predict parameters
     pred_it<-matrix(NA,nrow(test.y),ncol(test.y))
     if (scale==TRUE){
       tv.x<-scales::rescale(as.matrix(tv.x), to=c(-1,1))
