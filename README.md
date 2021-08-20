@@ -1,5 +1,5 @@
 
-# General Regression Neural Networks (GRNNs) package
+# General Regression Neural Networks (GRNNs) Package
 
 <!-- badges: start -->
 <!-- badges: end -->
