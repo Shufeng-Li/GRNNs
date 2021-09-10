@@ -7,11 +7,11 @@
 grnn(p_input, p_train, v_train, fun = "euclidean", best.spread, scale = TRUE)
 }
 \arguments{
-\item{p_input}{The matrix of input predictors}
+\item{p_input}{The dataframe of input predictors}
 
-\item{p_train}{The matrix of training predictor dataset}
+\item{p_train}{The dataframe of training predictor dataset}
 
-\item{v_train}{The matrix of training response variables}
+\item{v_train}{The dataframe of training response variables}
 
 \item{fun}{The distance function}
 
@@ -23,7 +23,10 @@ grnn(p_input, p_train, v_train, fun = "euclidean", best.spread, scale = TRUE)
 The predictions
 }
 \description{
-General Regression Neural Networks (GRNNs)
+This GRNNs uses various distance functions including: "euclidean", "minkowski",
+"manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming",
+"jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup",
+"binomial", "chao", "cao","mahalanobis".
 }
 \examples{
 data("met")

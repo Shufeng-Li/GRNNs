@@ -1,16 +1,16 @@
 Package: GRNNs
-Title: General Regression Neural Networks (GRNNs) Package
-Version: 0.0.0.9000
+Title: General Regression Neural Networks Package
+Version: 0.1.0
 Authors@R: 
     person(given = "Shufeng",
            family = "LI",
            role = c("aut", "cre"),
            email = "lisf@xtbg.org.cn",
            comment = c(ORCID = "0000-0002-5144-4432"))
-Description: This GRNNs package uses various distance functions inluding: "euclidean", "minkowski", 
-    "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming", 
-    "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup",
-    "binomial", "chao", "cao","mahalanobis".
+Description: This General Regression Neural Networks Package uses various distance functions.
+     It was motivated by Specht (1991, ISBN:1045-9227), and updated from previous published paper 
+     Li et al. (2016) <doi:10.1016/j.palaeo.2015.11.005>. This package includes various functions, 
+     although "euclidean" distance is used traditionally.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

@@ -1,7 +1,7 @@
 #' Find best spread
 #'
-#' @param p_train The matrix of training predictor dataset
-#' @param v_train The matrix of training response variables
+#' @param p_train The dataframe of training predictor dataset
+#' @param v_train The dataframe of training response variables
 #' @param k The numeric number of k folds
 #' @param fun The distance function
 #' @param scale The logic statements (TRUE/FALSE)
@@ -12,7 +12,7 @@
 #' @examples
 #' data("met")
 #' data("physg")
-#' best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)
+#' \dontrun{best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)}
 findSpread<-function(p_train,v_train,k,fun,scale=TRUE){
   if ( fun== "euclidean"|fun== "minkowski"|fun== "manhattan"|
        fun== "maximum"|fun== "canberra"|fun== "angular"|

@@ -7,9 +7,9 @@
 findSpread(p_train, v_train, k, fun, scale = TRUE)
 }
 \arguments{
-\item{p_train}{The matrix of training predictor dataset}
+\item{p_train}{The dataframe of training predictor dataset}
 
-\item{v_train}{The matrix of training response variables}
+\item{v_train}{The dataframe of training response variables}
 
 \item{k}{The numeric number of k folds}
 
@@ -26,5 +26,5 @@ Find best spread
 \examples{
 data("met")
 data("physg")
-best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)
+\dontrun{best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)}
 }

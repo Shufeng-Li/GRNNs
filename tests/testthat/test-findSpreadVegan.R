@@ -1,8 +1,11 @@
 test_that("length of spread equal to response variables", {
   data("met")
   data("physg")
-  best.spread<-findSpreadVegan(physg,met,10,"euclidean",scale=TRUE)
-  expect_equal(length(best.spread), ncol(met))
+  met.test<-met[1:30,1]
+  met.test<-as.data.frame(met.test)
+  physg.test<-physg[1:30,]
+  best.spread<-findSpreadVegan(physg.test,met.test,3,"bray",scale=TRUE)
+  expect_equal(length(best.spread), ncol(met.test))
 })
 
 test_that("error of the input 'fun'", {

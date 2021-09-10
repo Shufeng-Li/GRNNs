@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of GRNNs is to build a GRNN model using different functions. This GRNNs package uses various distance functions inluding: "euclidean", "minkowski", "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming", "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao","mahalanobis".
+The goal of GRNNs is to build a GRNN model using different functions. The traditional GRNN use euclidean distance (Specht, 1991), however, it can be applied to various distance functions. This GRNNs package uses various distance functions including: "euclidean", "minkowski", "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming", "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup", "binomial", "chao", "cao","mahalanobis".
 
 To load the package:
 ```{r setup}
@@ -38,7 +38,7 @@ data("physg")
 The k-fold cross-validation is used to evaluate the performance of GRNNs. The root mean square error (RMSE), standard deviation of absolute error (SDAE) were used to evaluate the accuracy and precision of different models respectively. The mean absolute error (MAE), standard deviation (STDEV) , coefficient of correlation (R), and P-value also provide.
 An example is illustrated below:
 
-```{r}
+```{r,eval = FALSE}
 data("met")
 data("physg")
 results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
@@ -48,7 +48,7 @@ results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
 
 The best spreads have to be tuned which can be calculated from the function findSpread. An example is illustrated below:
 
-```{r}
+```{r,eval = FALSE}
 data("met")
 data("physg")
 best.spread<-findSpread(physg,met,10,"bray",scale=TRUE)
@@ -70,7 +70,7 @@ prediction<-grnn(predict,physg.train,met.train,fun="euclidean",best.spread,scale
 
 ## grnn distance
 
-The grnn distance function is used to calculate the distance (or dissimilarity coefficients) between two data sets. An example is illustrated below:
+The grnn.distance return the distance (or dissimilarity coefficients) between two data sets. An example is illustrated below:
 
 ```{r}
 data("physg")
@@ -81,8 +81,10 @@ distance<-grnn.distance(physg.test,physg.train,"bray")
 
 ## references
 
-Li, S.-F., Jacques, F.M., Spicer, R.A., Su, T., Spicer, T.E., Yang, J., Zhou, Z.-K., 2016. Artificial neural networks reveal a high-resolution climatic signal in leaf physiognomy. Palaeogeogr. Palaeoclimatol. Palaeoecol. 442, 1-11.
+Li, S.-F., Jacques, F.M., Spicer, R.A., Su, T., Spicer, T.E., Yang, J., Zhou, Z.-K., 2016. Artificial neural networks reveal a high-resolution climatic signal in leaf physiognomy. Palaeogeography Palaeoclimatology Palaeoecology 442, 1-11.
 
-New, M., Lister, D., Hulme, M.,Makin, I., 2002. A high-resolution data set of surface climate over global land areas. Clim. Res. 21, 1–25.
+New, M., Lister, D., Hulme, M.,Makin, I., 2002. A high-resolution data set of surface climate over global land areas. Climate Research 21, 1–25.
 
-Spicer, R.A., Valdes, P.J., Spicer, T.E.V., Craggs, H.J., Srivastava, G., Mehrotra, R.C., Yang, J., 2009. New developments in CLAMP: calibration using global gridded meteorological data. Palaeogeogr. Palaeoclimatol. Palaeoecol. 283, 91–98.
+Specht, D.F., 1991. A general regression neural network. Neural Networks, IEEE Transactions on 2, 568-576.
+
+Spicer, R.A., Valdes, P.J., Spicer, T.E.V., Craggs, H.J., Srivastava, G., Mehrotra, R.C., Yang, J., 2009. New developments in CLAMP: calibration using global gridded meteorological data. Palaeogeography. Palaeoclimatology Palaeoecology 283, 91–98.

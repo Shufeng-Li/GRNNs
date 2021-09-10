@@ -7,9 +7,9 @@
 veg.distance(a, b, fun = "bray")
 }
 \arguments{
-\item{a}{The matrix of training predictor dataset}
+\item{a}{The dataframe of training predictor dataset}
 
-\item{b}{The matrix of validation predictor dataset}
+\item{b}{The dataframe of validation predictor dataset}
 
 \item{fun}{The distance function}
 }

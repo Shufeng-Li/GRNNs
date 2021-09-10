@@ -1,7 +1,7 @@
 #' distance using vegdist
 #'
-#' @param a The matrix of training predictor dataset
-#' @param b The matrix of validation predictor dataset
+#' @param a The dataframe of training predictor dataset
+#' @param b The dataframe of validation predictor dataset
 #' @param fun The distance function
 #'
 #' @importFrom vegan vegdist

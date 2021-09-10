@@ -1,7 +1,7 @@
 #' Find best spread using vegan function
 #'
-#' @param x The matrix of training predictor dataset
-#' @param y The matrix of training response variables
+#' @param x The dataframe of training predictor dataset
+#' @param y The dataframe of training response variables
 #' @param k The numeric number of k folds
 #' @param fun The distance function
 #' @param scale The logic statements (TRUE/FALSE)
@@ -12,6 +12,8 @@
 #' @export
 #'
 findSpreadVegan <- function(x,y,k,fun,scale=TRUE) {
+  x<-as.data.frame(x)
+  y<-as.data.frame(y)
   spread_all<-NULL
   rmse_all<-NULL
   cvr<-cvTools::cvFolds(nrow(x), K = k)  # Generate the index of random k folds for the data
@@ -19,11 +21,11 @@ findSpreadVegan <- function(x,y,k,fun,scale=TRUE) {
   for (spread in seq(0.01, 2, 0.01)) {
     predict<-NULL
     #print(spread)
-    for (i in 1:10) {
-      train.x <- x[subcvr[cvr$which != i], ]       # k-1 folds of physiognomic data used for training
-      validation.x <- x[subcvr[cvr$which == i], ]  # 1 folds of physiognomic data used as validation data
-      train.y <- y[subcvr[cvr$which != i], ]         # k-1 folds of meteorological data used for training
-      validation.y <- y[subcvr[cvr$which == i], ]    # 1 folds of meteorological data used as validation data
+    for (i in 1:k) {
+      train.x <- x[subcvr[cvr$which != i],,drop=FALSE]       # k-1 folds of physiognomic data used for training
+      validation.x <- x[subcvr[cvr$which == i],,drop=FALSE]  # 1 folds of physiognomic data used as validation data
+      train.y <- y[subcvr[cvr$which != i],,drop=FALSE]         # k-1 folds of meteorological data used for training
+      validation.y <- y[subcvr[cvr$which == i],,drop=FALSE]    # 1 folds of meteorological data used as validation data
       if (scale==TRUE){
         train.x<-scales::rescale(as.matrix(train.x), to=c(-1,1))
         validation.x<-scales::rescale(as.matrix(validation.x), to=c(-1,1))
@@ -40,6 +42,7 @@ findSpreadVegan <- function(x,y,k,fun,scale=TRUE) {
     predict1<-predict[order(rownames(predict)),]
     y1<-y[order(rownames(y)),]
     res<-predict1-y1          # Calculating the errors between the prediction values and the validation values
+    res<-as.data.frame(res)
     rmse<-sqrt(colSums(res^2)/nrow(res))  # root-mean-square error
     spread_all<-rbind(spread_all,spread)
     rmse_all<-rbind(rmse_all,rmse)

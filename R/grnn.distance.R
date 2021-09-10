@@ -1,7 +1,7 @@
 #' grnn distance
 #'
-#' @param x The matrix of training predictor dataset
-#' @param y The matrix of training response variables
+#' @param x The dataframe of training predictor dataset
+#' @param y The dataframe of training response variables
 #' @param fun The distance function
 #'
 #' @importFrom rdist cdist

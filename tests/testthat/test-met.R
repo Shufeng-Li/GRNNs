@@ -1,4 +1,4 @@
 test_that("multiplication works", {
   data("met")
-  expect_is(met, "data.frame")
+  expect_s3_class(met, "data.frame")
 })

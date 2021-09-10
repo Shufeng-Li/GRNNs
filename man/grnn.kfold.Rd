@@ -7,9 +7,9 @@
 grnn.kfold(x, y, k, fun, scale = TRUE)
 }
 \arguments{
-\item{x}{The matrix of training predictor dataset}
+\item{x}{The dataframe of training predictor dataset}
 
-\item{y}{The matrix of training response variables}
+\item{y}{The dataframe of training response variables}
 
 \item{k}{The numeric number of k folds}
 
@@ -26,5 +26,5 @@ General Regression Neural Networks (GRNNs)
 \examples{
 data("met")
 data("physg")
-results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
+\donttest{results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)}
 }

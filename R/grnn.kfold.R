@@ -1,7 +1,7 @@
 #' General Regression Neural Networks (GRNNs)
 #'
-#' @param x The matrix of training predictor dataset
-#' @param y The matrix of training response variables
+#' @param x The dataframe of training predictor dataset
+#' @param y The dataframe of training response variables
 #' @param k The numeric number of k folds
 #' @param fun The distance function
 #' @param scale The logic statements (TRUE/FALSE)
@@ -17,8 +17,10 @@
 #' @examples
 #' data("met")
 #' data("physg")
-#' results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)
+#' \donttest{results_kfold<-grnn.kfold(physg,met,10,"euclidean",scale=TRUE)}
 grnn.kfold <- function(x,y,k,fun,scale=TRUE) {
+  x<-as.data.frame(x)
+  y<-as.data.frame(y)
   # the follow code are to find the optimal spread
   n_p<-ncol(y)
   n_s<-nrow(y)
@@ -27,12 +29,12 @@ grnn.kfold <- function(x,y,k,fun,scale=TRUE) {
 
   cvr1<-cvTools::cvFolds(n_s, K = k)
   predict_end<-NULL
-  for (i in 1:10) {
+  for (i in 1:k) {
     subcvr1<-cvr1$subsets
-    tv.x <- x[subcvr1[cvr1$which != i], ]
-    test.x <- x[subcvr1[cvr1$which == i], ]
-    tv.y <- y[subcvr1[cvr1$which != i], ]
-    test.y <- y[subcvr1[cvr1$which == i], ]
+    tv.x <- x[subcvr1[cvr1$which != i],,drop=FALSE]
+    test.x <- x[subcvr1[cvr1$which == i],,drop=FALSE]
+    tv.y <- y[subcvr1[cvr1$which != i],,drop=FALSE]
+    test.y <- y[subcvr1[cvr1$which == i],,drop=FALSE]
     best.spread<-findSpread (tv.x,tv.y,k,fun)
     spread.end<-rbind(spread.end,best.spread)
     #end for find optimal spread
@@ -56,6 +58,7 @@ grnn.kfold <- function(x,y,k,fun,scale=TRUE) {
   predict_all<-predict_end[order(rownames(predict_end)),]
   y_all<-y[order(rownames(y)),]
   res<-predict_all-y_all
+  res<-as.data.frame(res)
   stdev<-numeric(ncol(res))
   stdae<-numeric(ncol(res))
   mae<-numeric(ncol(res))

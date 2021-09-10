@@ -1,8 +1,12 @@
 #' General Regression Neural Networks (GRNNs)
 #'
-#' @param p_input The matrix of input predictors
-#' @param p_train The matrix of training predictor dataset
-#' @param v_train The matrix of training response variables
+#' @description This GRNNs uses various distance functions including: "euclidean", "minkowski",
+#' "manhattan", "maximum", "canberra", "angular", "correlation", "absolute_correlation", "hamming",
+#' "jaccard","bray", "kulczynski", "gower", "altGower", "morisita", "horn", "mountford", "raup",
+#' "binomial", "chao", "cao","mahalanobis".
+#' @param p_input The dataframe of input predictors
+#' @param p_train The dataframe of training predictor dataset
+#' @param v_train The dataframe of training response variables
 #' @param fun The distance function
 #' @param best.spread The vector of best spreads
 #' @param scale The logic statements (TRUE/FALSE)
@@ -20,6 +24,9 @@
 #' met.train<-met[-1,]
 #' prediction<-grnn(predict,physg.train,met.train,fun="euclidean",best.spread,scale=TRUE)
 grnn<- function(p_input,p_train,v_train,fun="euclidean",best.spread,scale=TRUE){
+  p_input<-as.data.frame(p_input)
+  p_train<-as.data.frame(p_train)
+  v_train<-as.data.frame(v_train)
   n_col<-ncol(v_train)
   n_row<-nrow(p_input)
   pred_it<-numeric(n_col)
